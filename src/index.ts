@@ -2,14 +2,17 @@ import 'dotenv/config'
 import { createClient } from '@supabase/supabase-js'
 // @ts-ignore
 import { Database } from './database/types'
-import { Seed, EVENT_SEED_TYPES_TAGS, BUSINESS_SEED_TYPES_AND_TAGS, RESOURCE_SEED_TYPES_AND_TAGS} from "./seeds.js";
+import {
+    Seed, EVENT_SEED_TYPES_TAGS, BUSINESS_SEED_TYPES_AND_TAGS, RESOURCE_SEED_TYPES_AND_TAGS,
+    EVENT_CROSS_CATEGORY_SEED, BUSINESS_CROSS_CATEGORY_SEED, RESOURCE_CROSS_CATEGORY_SEED
+} from "./seeds.js";
 
 const supabase = createClient<Database>(
     process.env.SUPABASE_URL!,
     process.env.SUPABASE_ANON_KEY!
 )
 
-const SEED: Seed[] = [...EVENT_SEED_TYPES_TAGS, ...BUSINESS_SEED_TYPES_AND_TAGS, ...RESOURCE_SEED_TYPES_AND_TAGS]
+const SEED: Seed[] = [...EVENT_SEED_TYPES_TAGS, ...EVENT_CROSS_CATEGORY_SEED, ...BUSINESS_SEED_TYPES_AND_TAGS, ...BUSINESS_CROSS_CATEGORY_SEED, ...RESOURCE_SEED_TYPES_AND_TAGS, ...RESOURCE_CROSS_CATEGORY_SEED]
 
 async function seed() {
     // 1) Insert all types
@@ -41,9 +44,9 @@ async function seed() {
 
         for (const tag of t.tags) {
             tagRows.push({
-                name: tag,
+                name: tag.name,
                 item_type: t.item_type,
-                cross_category:  false,
+                cross_category:  tag.cross_category ?? false,
                 parent_type: typeId,
             })
         }
