@@ -979,33 +979,6 @@ export type Database = {
           id: number
           item_type: Database["public"]["Enums"]["item_type"]
           name: string | null
-          updated_at: string | null
-        }
-        Insert: {
-          created_at?: string
-          cross_category?: boolean
-          id?: number
-          item_type: Database["public"]["Enums"]["item_type"]
-          name?: string | null
-          updated_at?: string | null
-        }
-        Update: {
-          created_at?: string
-          cross_category?: boolean
-          id?: number
-          item_type?: Database["public"]["Enums"]["item_type"]
-          name?: string | null
-          updated_at?: string | null
-        }
-        Relationships: []
-      }
-      types: {
-        Row: {
-          created_at: string
-          cross_category: boolean
-          id: number
-          item_type: Database["public"]["Enums"]["item_type"]
-          name: string | null
           parent_type: number | null
           updated_at: string | null
         }
@@ -1029,13 +1002,40 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "types_parent_type_fkey"
+            foreignKeyName: "tags_parent_type_fkey"
             columns: ["parent_type"]
             isOneToOne: false
             referencedRelation: "types"
             referencedColumns: ["id"]
           },
         ]
+      }
+      types: {
+        Row: {
+          created_at: string
+          cross_category: boolean
+          id: number
+          item_type: Database["public"]["Enums"]["item_type"]
+          name: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string
+          cross_category?: boolean
+          id?: number
+          item_type: Database["public"]["Enums"]["item_type"]
+          name?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string
+          cross_category?: boolean
+          id?: number
+          item_type?: Database["public"]["Enums"]["item_type"]
+          name?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
       }
       users: {
         Row: {
