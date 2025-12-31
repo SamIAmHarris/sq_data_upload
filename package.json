@@ -4,9 +4,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "node --loader ts-node/esm src/index.ts",
+    "dev": "node --loader ts-node/esm src/seed_types_tags.ts",
     "build": "tsc",
-    "start": "node dist/index.js",
+    "seed_types": "node dist/seed_types_tags.js",
+    "seed_what_else": "node dist/seed_what_else_types_tags.js",
     "gen:types": "supabase gen types typescript --linked --schema public,storage,graphql_public > src/database/types.ts"
   },
   "dependencies": {

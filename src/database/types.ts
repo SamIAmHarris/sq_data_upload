@@ -975,7 +975,6 @@ export type Database = {
       tags: {
         Row: {
           created_at: string
-          cross_category: boolean
           id: number
           item_type: Database["public"]["Enums"]["item_type"]
           name: string | null
@@ -984,7 +983,6 @@ export type Database = {
         }
         Insert: {
           created_at?: string
-          cross_category?: boolean
           id?: number
           item_type: Database["public"]["Enums"]["item_type"]
           name?: string | null
@@ -993,7 +991,6 @@ export type Database = {
         }
         Update: {
           created_at?: string
-          cross_category?: boolean
           id?: number
           item_type?: Database["public"]["Enums"]["item_type"]
           name?: string | null
@@ -1013,7 +1010,6 @@ export type Database = {
       types: {
         Row: {
           created_at: string
-          cross_category: boolean
           id: number
           item_type: Database["public"]["Enums"]["item_type"]
           name: string | null
@@ -1021,7 +1017,6 @@ export type Database = {
         }
         Insert: {
           created_at?: string
-          cross_category?: boolean
           id?: number
           item_type: Database["public"]["Enums"]["item_type"]
           name?: string | null
@@ -1029,7 +1024,6 @@ export type Database = {
         }
         Update: {
           created_at?: string
-          cross_category?: boolean
           id?: number
           item_type?: Database["public"]["Enums"]["item_type"]
           name?: string | null
@@ -1058,6 +1052,53 @@ export type Database = {
           role?: Database["public"]["Enums"]["user_role"] | null
           user_id?: string
           username?: string | null
+        }
+        Relationships: []
+      }
+      we_tags: {
+        Row: {
+          created_at: string
+          id: number
+          name: string | null
+          parent_type: number | null
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          name?: string | null
+          parent_type?: number | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          name?: string | null
+          parent_type?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "we_tags_parent_type_fkey"
+            columns: ["parent_type"]
+            isOneToOne: false
+            referencedRelation: "we_types"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      we_types: {
+        Row: {
+          created_at: string
+          id: number
+          name: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          name?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          name?: string | null
         }
         Relationships: []
       }
